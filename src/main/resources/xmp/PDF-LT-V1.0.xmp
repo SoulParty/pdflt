@@ -1,0 +1,137 @@
+<pdfaExtension:schemas>
+	<rdf:Bag>
+		<rdf:li rdf:parseType="Resource">
+			<pdfaSchema:schema>PDF-LT-V1.0 elektroninio dokumento metaduomenų plėtinio schema</pdfaSchema:schema>
+			<pdfaSchema:namespaceURI>http://archyvai.lt/pdf-ltud/2013/metadata/</pdfaSchema:namespaceURI>
+			<pdfaSchema:prefix>LTUd</pdfaSchema:prefix>
+			<pdfaSchema:property>
+				<rdf:Seq>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaProperty:name>standardVersion</pdfaProperty:name>
+						<pdfaProperty:valueType>closed Choice of Text</pdfaProperty:valueType>
+						<pdfaProperty:category>internal</pdfaProperty:category>
+						<pdfaProperty:description>Elektroninio dokumento specifikacijos identifikatorius (pvz., PDF-LT-V1.0)</pdfaProperty:description>
+					</rdf:li>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaProperty:name>authors</pdfaProperty:name>
+						<pdfaProperty:valueType>seq Entity</pdfaProperty:valueType>
+						<pdfaProperty:category>external</pdfaProperty:category>
+						<pdfaProperty:description>Dokumento sudarytojas (-ai)</pdfaProperty:description>
+					</rdf:li>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaProperty:name>recipients</pdfaProperty:name>
+						<pdfaProperty:valueType>seq Entity</pdfaProperty:valueType>
+						<pdfaProperty:category>external</pdfaProperty:category>
+						<pdfaProperty:description>Dokumento adresatas (-ai)</pdfaProperty:description>
+					</rdf:li>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaProperty:name>documentCopyIdentifier</pdfaProperty:name>
+						<pdfaProperty:valueType>Text</pdfaProperty:valueType>
+						<pdfaProperty:category>external</pdfaProperty:category>
+						<pdfaProperty:description>Dokumento egzemplioriaus identifikatorius</pdfaProperty:description>
+					</rdf:li>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaProperty:name>originalRegistrations</pdfaProperty:name>
+						<pdfaProperty:valueType>seq Registration</pdfaProperty:valueType>
+						<pdfaProperty:category>external</pdfaProperty:category>
+						<pdfaProperty:description>Originalaus dokumento registracija (-os) kopijoje</pdfaProperty:description>
+					</rdf:li>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaProperty:name>originalReceptions</pdfaProperty:name>
+						<pdfaProperty:valueType>seq Registration</pdfaProperty:valueType>
+						<pdfaProperty:category>external</pdfaProperty:category>
+						<pdfaProperty:description>Gauto originalaus dokumento registracija(-os) kopijoje</pdfaProperty:description>
+					</rdf:li>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaProperty:name>originalReceivers</pdfaProperty:name>
+						<pdfaProperty:valueType>seq Entity</pdfaProperty:valueType>
+						<pdfaProperty:category>external</pdfaProperty:category>
+						<pdfaProperty:description>Originalaus dokumento gavėjas (-ai) kopijoje</pdfaProperty:description>
+					</rdf:li>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaProperty:name>registration</pdfaProperty:name>
+						<pdfaProperty:valueType>Registration</pdfaProperty:valueType>
+						<pdfaProperty:category>external</pdfaProperty:category>
+						<pdfaProperty:description>Sudaryto dokumento registracija</pdfaProperty:description>
+					</rdf:li>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaProperty:name>reception</pdfaProperty:name>
+						<pdfaProperty:valueType>Registration</pdfaProperty:valueType>
+						<pdfaProperty:category>external</pdfaProperty:category>
+						<pdfaProperty:description>Gauto dokumento registracija</pdfaProperty:description>
+					</rdf:li>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaProperty:name>receiver</pdfaProperty:name>
+						<pdfaProperty:valueType>Entity</pdfaProperty:valueType>
+						<pdfaProperty:category>external</pdfaProperty:category>
+						<pdfaProperty:description>Dokumento gavėjas</pdfaProperty:description>
+					</rdf:li>
+				</rdf:Seq>
+			</pdfaSchema:property>
+			<pdfaSchema:valueType>
+				<rdf:Seq>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaType:description>Asmuo (sudarytojas, adresatas, gavėjas)</pdfaType:description>
+						<pdfaType:namespaceURI>http://archyvai.lt/pdf-ltud/2013/metadata/Entity/</pdfaType:namespaceURI>
+						<pdfaType:prefix>LTUdEnt</pdfaType:prefix>
+						<pdfaType:type>Entity</pdfaType:type>
+						<pdfaType:field>
+							<rdf:Seq>
+								<rdf:li rdf:parseType="Resource">
+									<pdfaField:name>individual</pdfaField:name>
+									<pdfaField:valueType>Boolean</pdfaField:valueType>
+									<pdfaField:description>Požymis: fizinis (taip) ar juridinis (ne) asmuo</pdfaField:description>
+								</rdf:li>
+								<rdf:li rdf:parseType="Resource">
+									<pdfaField:name>name</pdfaField:name>
+									<pdfaField:valueType>Text</pdfaField:valueType>
+									<pdfaField:description>Juridinio asmens pavadinimas arba fizinio asmens vardas ir pavardė</pdfaField:description>
+								</rdf:li>
+								<rdf:li rdf:parseType="Resource">
+									<pdfaField:name>code</pdfaField:name>
+									<pdfaField:valueType>Text</pdfaField:valueType>
+									<pdfaField:description>Juridinio ar fizinio asmens kodas</pdfaField:description>
+								</rdf:li>
+								<rdf:li rdf:parseType="Resource">
+									<pdfaField:name>address</pdfaField:name>
+									<pdfaField:valueType>Text</pdfaField:valueType>
+									<pdfaField:description>Adresas</pdfaField:description>
+								</rdf:li>
+								<rdf:li rdf:parseType="Resource">
+									<pdfaField:name>eMail</pdfaField:name>
+									<pdfaField:valueType>Text</pdfaField:valueType>
+									<pdfaField:description>El. pašto adresas</pdfaField:description>
+								</rdf:li>
+							</rdf:Seq>
+						</pdfaType:field>
+					</rdf:li>
+					<rdf:li rdf:parseType="Resource">
+						<pdfaType:description>Sudaryto ar gauto dokumento registracija</pdfaType:description>
+						<pdfaType:namespaceURI>http://archyvai.lt/pdf-ltud/2013/metadata/Registration/</pdfaType:namespaceURI>
+						<pdfaType:prefix>LTUdReg</pdfaType:prefix>
+						<pdfaType:type>Registration</pdfaType:type>
+						<pdfaType:field>
+							<rdf:Seq>
+								<rdf:li rdf:parseType="Resource">
+									<pdfaField:name>date</pdfaField:name>
+									<pdfaField:valueType>Date</pdfaField:valueType>
+									<pdfaField:description>Registravimo data</pdfaField:description>
+								</rdf:li>
+								<rdf:li rdf:parseType="Resource">
+									<pdfaField:name>number</pdfaField:name>
+									<pdfaField:valueType>Text</pdfaField:valueType>
+									<pdfaField:description>Registracijos numeris</pdfaField:description>
+								</rdf:li>
+								<rdf:li rdf:parseType="Resource">
+									<pdfaField:name>code</pdfaField:name>
+									<pdfaField:valueType>Text</pdfaField:valueType>
+									<pdfaField:description>Juridinio ar fizinio asmens kodas</pdfaField:description>
+								</rdf:li>
+							</rdf:Seq>
+						</pdfaType:field>
+					</rdf:li>
+				</rdf:Seq>
+			</pdfaSchema:valueType>
+		</rdf:li>
+	</rdf:Bag>
+</pdfaExtension:schemas>

@@ -1,0 +1,10 @@
+<xmp:Identifier>
+	<rdf:Bag>
+		<rdf:li>
+			<rdf:Description>
+				<rdf:value>A</rdf:value>
+				<xmpidq:Scheme>http://archyvai.lt/pdf-ltud/2013/level/</xmpidq:Scheme>
+			</rdf:Description>
+		</rdf:li>
+	</rdf:Bag>
+</xmp:Identifier>
