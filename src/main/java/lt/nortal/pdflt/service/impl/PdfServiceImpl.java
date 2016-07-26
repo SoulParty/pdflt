@@ -133,7 +133,7 @@ public class PdfServiceImpl implements PdfService {
       File file = fontFile.getFile();
       FontFactory.register(file.getAbsolutePath(), "signature_font");
     } catch (Exception e) {
-      logger.error(e.getMessage(), e);
+      /*Too bad*/
     }
   }
 
