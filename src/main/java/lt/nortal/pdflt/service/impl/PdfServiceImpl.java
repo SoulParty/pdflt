@@ -85,7 +85,7 @@ public class PdfServiceImpl implements PdfService {
   private static final String SHA1 = "SHA1";
   private static final String SHA256 = "SHA256";
   private String digestAlgorithm = SHA1;
-  private static final CryptoStandard CRYPTO_STANDARD = CryptoStandard.CMS;
+  private static final CryptoStandard CRYPTO_STANDARD = CryptoStandard.CADES;
 
   protected static final char DEF_PDF_VERSION = '\0';
   /**
