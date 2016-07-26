@@ -64,8 +64,6 @@ import com.itextpdf.text.pdf.security.TSAClient;
 import com.itextpdf.text.pdf.security.TSAClientBouncyCastle;
 
 import org.bouncycastle.jce.provider.BouncyCastleProvider;
-import org.digidoc4j.DigestAlgorithm;
-import org.digidoc4j.utils.TokenAlgorithmSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,9 +80,7 @@ public class PdfServiceImpl implements PdfService {
   private static Logger logger = LoggerFactory.getLogger(PdfServiceImpl.class);
 
   private static final float MARGIN = 2;
-  private static final String SHA1 = "SHA1";
-  private static final String SHA256 = "SHA256";
-  private String digestAlgorithm = SHA1;
+  private static final String DIGEST_ALGORITHM = "SHA1";
   private static final CryptoStandard CRYPTO_STANDARD = CryptoStandard.CADES;
 
   protected static final char DEF_PDF_VERSION = '\0';
@@ -151,11 +147,6 @@ public class PdfServiceImpl implements PdfService {
   public PresignData prepareToSign(PdfReader reader, OutputStream pdfPresignOutputStream, SignatureProperties signatureProperties, X509Certificate certificate)
       throws Exception {
 
-    DigestAlgorithm digestAlgorithm = TokenAlgorithmSupport.determineSignatureDigestAlgorithm(certificate);
-    if (digestAlgorithm.toString().equals("http://www.w3.org/2001/04/xmlenc#sha256")) {
-      this.digestAlgorithm = SHA256;
-    }
-
     PresignData data = new PresignData();
     data.setApplyTimestamp(signatureProperties.getSigMetaData().isApplyTimestamp());
     data.setSigningDate(GregorianCalendar.getInstance());
@@ -171,7 +162,7 @@ public class PdfServiceImpl implements PdfService {
 
     MarkerOutputStream markerOutputStream = new MarkerOutputStream(pdfPresignOutputStream, dummySigFileRepresentation);
     PdfSignatureAppearance sap = buildSignatureAppearance(reader, markerOutputStream, data, signatureProperties);
-    byte[] secondDigest = calculateDigest(sap.getRangeStream(), this.digestAlgorithm);
+    byte[] secondDigest = calculateDigest(sap.getRangeStream(), this.DIGEST_ALGORITHM);
     data.setSecondDigest(secondDigest);
 
     prepareSignature(data);
@@ -209,7 +200,7 @@ public class PdfServiceImpl implements PdfService {
   }
 
   public PdfPKCS7 prepareSignature(PresignData data) throws GeneralSecurityException {
-    PdfPKCS7 sgn = new PdfPKCS7(null, data.getCertificateChain(), digestAlgorithm, null, new BouncyCastleDigest(), false);
+    PdfPKCS7 sgn = new PdfPKCS7(null, data.getCertificateChain(), DIGEST_ALGORITHM, null, new BouncyCastleDigest(), false);
     byte bytesToSign[] = sgn.getAuthenticatedAttributeBytes(data.getSecondDigest(), data.getSigningDate(), data.getOcspBytes(), null, CRYPTO_STANDARD);
     // Check if bytes to sign match actually signed bytes
     if (data.getBytesToSign() != null && !Arrays.equals(bytesToSign, data.getBytesToSign())) {
@@ -248,7 +239,7 @@ public class PdfServiceImpl implements PdfService {
   public void sign(InputStream pdfPresignInputStream, OutputStream pdfOutputStream, PresignData data, byte[] signatureBytes) throws Exception {
     // Check if signature bytes are correct
     PublicKey publicKey = data.getCertificate().getPublicKey();
-    Signature signature = Signature.getInstance(digestAlgorithm + "with" + publicKey.getAlgorithm());
+    Signature signature = Signature.getInstance(DIGEST_ALGORITHM + "with" + publicKey.getAlgorithm());
     signature.initVerify(publicKey);
     signature.update(data.getBytesToSign());
     if (!signature.verify(signatureBytes)) {
@@ -609,7 +600,7 @@ public class PdfServiceImpl implements PdfService {
    */
   public TSAClient getTsaClient() {
     if (tsaClient == null) {
-      tsaClient = new TSAClientBouncyCastle(tsaUrl, null, null, 4096, digestAlgorithm);
+      tsaClient = new TSAClientBouncyCastle(tsaUrl, null, null, 4096, DIGEST_ALGORITHM);
     }
     return tsaClient;
   }
