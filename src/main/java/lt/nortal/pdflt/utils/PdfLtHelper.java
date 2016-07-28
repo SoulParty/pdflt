@@ -1,14 +1,12 @@
 package lt.nortal.pdflt.utils;
 
 import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 
 import lt.nortal.pdflt.domain.DocumentMetaData;
-import lt.nortal.pdflt.domain.NamedDestinationSignaturePosition;
 import lt.nortal.pdflt.domain.RegistrationMetaData;
 import lt.nortal.pdflt.domain.SignatureMetaData;
 import lt.nortal.pdflt.domain.SignatureProperties;
@@ -17,15 +15,13 @@ import lt.nortal.pdflt.xmp.struct.LTUEntity;
 import lt.nortal.pdflt.xmp.struct.LTURegistration;
 import lt.nortal.unisign.ws.types.pdflt.common.SigningReason;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
 
 /**
  * Created by DK on 7/7/16.
  */
 public class PdfLtHelper {
 
-	private static Logger logger = LoggerFactory.getLogger(PdfLtHelper.class);
 
 	private PdfLtHelper() {
 	}

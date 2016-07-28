@@ -18,7 +18,4 @@ public interface PdfService {
           X509Certificate certificate) throws Exception;
 
   void sign(InputStream pdfPresignInputStream, OutputStream pdOutputStream, PresignData presignData, byte[] signatureBytes) throws Exception;
-
-  void timestamp(InputStream pdfInputStream, OutputStream pdOutputStream) throws Exception;
-
 }

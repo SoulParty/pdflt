@@ -2,9 +2,8 @@ package lt.nortal.pdflt.utils;
 
 import java.io.InputStream;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.itextpdf.text.log.Logger;
+import com.itextpdf.text.log.LoggerFactory;
 import com.itextpdf.text.pdf.PdfReader;
 
 public class PdfUtils {
@@ -23,7 +22,7 @@ public class PdfUtils {
     try {
       reader = new PdfReader(docBytes);
     } catch (Exception e) {
-      logger.warn("Failed to parse input document", e);
+      logger.warn("Failed to parse input document");
     }
 
     return reader;
@@ -40,7 +39,7 @@ public class PdfUtils {
       reader = new PdfReader(docBytes);
       // reader closes input stream internally
     } catch (Exception e) {
-      logger.warn("Failed to parse input document", e);
+      logger.warn("Failed to parse input document");
     }
 
     return reader;

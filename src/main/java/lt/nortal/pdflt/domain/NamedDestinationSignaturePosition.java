@@ -3,15 +3,14 @@ package lt.nortal.pdflt.domain;
 import lt.nortal.pdflt.utils.PdfSizeUtils;
 
 import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.log.Logger;
+import com.itextpdf.text.log.LoggerFactory;
 import com.itextpdf.text.pdf.PdfArray;
 import com.itextpdf.text.pdf.PdfIndirectReference;
 import com.itextpdf.text.pdf.PdfName;
 import com.itextpdf.text.pdf.PdfObject;
 import com.itextpdf.text.pdf.PdfReader;
 import com.itextpdf.text.pdf.PdfSignatureAppearance;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class NamedDestinationSignaturePosition extends SignaturePosition {
 

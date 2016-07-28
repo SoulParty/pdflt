@@ -2,6 +2,7 @@ package lt.nortal.pdflt.service.impl;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.Map;
 
@@ -12,12 +13,11 @@ import lt.nortal.pdflt.domain.RegistrationMetaData;
 import lt.nortal.pdflt.domain.SignatureMetaData;
 import lt.nortal.pdflt.domain.SignatureProperties;
 import lt.nortal.pdflt.xmp.LTUdSchema;
+import lt.nortal.pdflt.xmp.XmpReader;
 import lt.nortal.pdflt.xmp.struct.LTUEntity;
 import lt.nortal.pdflt.xmp.struct.LTURegistration;
-import lt.nortal.rc.unisign.util.pdf.XmpReader;
 import lt.webmedia.sigute.service.common.utils.FileUtils;
 import lt.webmedia.sigute.service.common.utils.PdfFileUtils;
-import sun.nio.cs.StandardCharsets;
 
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.exceptions.BadPasswordException;
@@ -37,31 +37,31 @@ import com.itextpdf.text.xml.xmp.DublinCoreSchema;
 import com.itextpdf.text.xml.xmp.PdfAXmpWriter;
 import com.itextpdf.text.xml.xmp.XmpArray;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.Resource;
-import org.springframework.stereotype.Service;
-
-@Service("pdfLtService")
 public class PdfLtServiceImpl extends PdfServiceImpl {
-
-	private static Logger LOGGER = LoggerFactory.getLogger(PdfLtServiceImpl.class);
 
 	private String xmpSchema;
 	private String identifier;
 
-	@Value(value = "classpath:/xmp/PDF-LT-V1.0.xmp")
-	public void setXmpSchema(Resource xmpSchema) throws IOException {
+	public PdfLtServiceImpl() {
+		try {
+			setXmpSchema();
+			setIdentifier();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void setXmpSchema() throws IOException {
+		InputStream resourceAsStream = PdfLtServiceImpl.class.getResourceAsStream("/xmp/PDF-LT-V1.0.xmp");
 		ByteArrayOutputStream tempOutStream = new ByteArrayOutputStream();
-		FileUtils.copyStreamsAndClose(xmpSchema.getInputStream(), tempOutStream);
+		FileUtils.copyStreamsAndClose(resourceAsStream, tempOutStream);
 		this.xmpSchema = new String(tempOutStream.toByteArray(), "UTF-8");
 	}
 
-	@Value(value = "classpath:/xmp/Identifier.xmp")
-	public void setIdentifier(Resource identifier) throws IOException {
+	public void setIdentifier() throws IOException {
+		InputStream resourceAsStream = PdfLtServiceImpl.class.getResourceAsStream("/xmp/Identifier.xmp");
 		ByteArrayOutputStream tempOutStream = new ByteArrayOutputStream();
-		FileUtils.copyStreamsAndClose(identifier.getInputStream(), tempOutStream);
+		FileUtils.copyStreamsAndClose(resourceAsStream, tempOutStream);
 		this.identifier = new String(tempOutStream.toByteArray(), "UTF-8");
 	}
 

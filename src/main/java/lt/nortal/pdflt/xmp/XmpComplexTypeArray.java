@@ -12,11 +12,10 @@ import javax.xml.datatype.DatatypeConfigurationException;
 import javax.xml.datatype.DatatypeFactory;
 import javax.xml.datatype.XMLGregorianCalendar;
 
+import lt.nortal.pdflt.utils.ReflectionUtils;
 import lt.nortal.pdflt.xmp.struct.AbstractXmpType;
 
 import com.itextpdf.text.xml.XMLUtil;
-
-import org.springframework.util.ReflectionUtils;
 
 public class XmpComplexTypeArray<T extends AbstractXmpType> extends ArrayList<T> {
 
