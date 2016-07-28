@@ -1,13 +1,22 @@
 package lt.nortal.pdflt.service.impl;
 
-import com.itextpdf.text.*;
-import com.itextpdf.text.log.Logger;
-import com.itextpdf.text.log.LoggerFactory;
-import com.itextpdf.text.pdf.*;
-import com.itextpdf.text.pdf.security.BouncyCastleDigest;
-import com.itextpdf.text.pdf.security.MakeSignature.CryptoStandard;
-import com.itextpdf.text.pdf.security.PdfPKCS7;
-import com.itextpdf.text.pdf.security.TSAClient;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.security.GeneralSecurityException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.PublicKey;
+import java.security.Signature;
+import java.security.cert.X509Certificate;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Random;
+
 import lt.nortal.pdflt.domain.PresignData;
 import lt.nortal.pdflt.domain.SignatureMetaData;
 import lt.nortal.pdflt.domain.SignaturePosition;
@@ -18,14 +27,35 @@ import lt.nortal.pdflt.xmp.XmpReader;
 import lt.webmedia.sigute.service.common.utils.CertificateUtils;
 import lt.webmedia.sigute.service.common.utils.FileUtils;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.security.*;
-import java.security.cert.X509Certificate;
-import java.util.*;
+import com.itextpdf.text.BadElementException;
+import com.itextpdf.text.BaseColor;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.Rectangle;
+import com.itextpdf.text.log.Logger;
+import com.itextpdf.text.log.LoggerFactory;
+import com.itextpdf.text.pdf.BaseFont;
+import com.itextpdf.text.pdf.ByteBuffer;
+import com.itextpdf.text.pdf.ColumnText;
+import com.itextpdf.text.pdf.PdfAConformanceLevel;
+import com.itextpdf.text.pdf.PdfAStamper;
+import com.itextpdf.text.pdf.PdfDate;
+import com.itextpdf.text.pdf.PdfDictionary;
+import com.itextpdf.text.pdf.PdfName;
+import com.itextpdf.text.pdf.PdfReader;
+import com.itextpdf.text.pdf.PdfSignature;
+import com.itextpdf.text.pdf.PdfSignatureAppearance;
+import com.itextpdf.text.pdf.PdfStamper;
+import com.itextpdf.text.pdf.PdfString;
+import com.itextpdf.text.pdf.PdfTemplate;
+import com.itextpdf.text.pdf.security.BouncyCastleDigest;
+import com.itextpdf.text.pdf.security.MakeSignature.CryptoStandard;
+import com.itextpdf.text.pdf.security.PdfPKCS7;
+import com.itextpdf.text.pdf.security.TSAClient;
 
 public class PdfServiceImpl implements PdfService {
 
