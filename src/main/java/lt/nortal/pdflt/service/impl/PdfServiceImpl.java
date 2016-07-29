@@ -9,6 +9,7 @@ import java.security.GeneralSecurityException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.PublicKey;
+import java.security.Security;
 import java.security.Signature;
 import java.security.cert.X509Certificate;
 import java.util.Arrays;
@@ -57,6 +58,8 @@ import com.itextpdf.text.pdf.security.MakeSignature.CryptoStandard;
 import com.itextpdf.text.pdf.security.PdfPKCS7;
 import com.itextpdf.text.pdf.security.TSAClient;
 
+import org.bouncycastle.jce.provider.BouncyCastleProvider;
+
 public class PdfServiceImpl implements PdfService {
 
 	private static Logger logger = LoggerFactory.getLogger(PdfServiceImpl.class);
@@ -76,6 +79,10 @@ public class PdfServiceImpl implements PdfService {
 	private String tsaUrl;
 	private TSAClient tsaClient;
 	private Random random = new Random();
+
+	public void PdfServiceImpl() {
+		Security.addProvider(new BouncyCastleProvider());
+	}
 
 	/*
 	   * (non-Javadoc)

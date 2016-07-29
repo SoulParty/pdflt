@@ -43,6 +43,7 @@ public class PdfLtServiceImpl extends PdfServiceImpl {
 	private String identifier;
 
 	public PdfLtServiceImpl() {
+		super();
 		try {
 			setXmpSchema();
 			setIdentifier();
