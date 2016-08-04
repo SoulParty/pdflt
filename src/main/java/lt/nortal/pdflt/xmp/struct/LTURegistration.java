@@ -6,7 +6,7 @@ import java.util.GregorianCalendar;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlType;
+import lt.nortal.XmlType;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(namespace = "LTUdReg", propOrder = {"date", "number", "code"})
