@@ -6,6 +6,7 @@ import java.lang.reflect.Method;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import com.itextpdf.text.xml.XMLUtil;
 import lt.nortal.XmlType;
 import lt.nortal.pdflt.utils.ReflectionUtils;
@@ -13,7 +14,7 @@ import lt.nortal.pdflt.xmp.struct.AbstractXmpType;
 
 public class XmpComplexTypeArray<T extends AbstractXmpType> extends ArrayList<T> {
     private static final long serialVersionUID = - 7794262726996018618L;
-    private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ssX");
+    private static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
     /**
      * the type of array.
      */
@@ -96,7 +97,7 @@ public class XmpComplexTypeArray<T extends AbstractXmpType> extends ArrayList<T>
                     }
                     else if (val instanceof Calendar) {
                         try {
-                            valText = DATE_FORMATTER.format(val);
+                            valText = DATE_FORMATTER.format(((Calendar) val).getTime());
                         } catch (Exception e) {
                             throw new RuntimeException("Date conversion error.", e);
                         }
